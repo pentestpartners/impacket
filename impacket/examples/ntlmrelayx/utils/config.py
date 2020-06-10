@@ -86,6 +86,11 @@ class NTLMRelayxConfig:
 
         # WebDAV options
         self.serve_image = False
+        
+        # Named Pipe options
+        self.pipe_name = ''
+        self.payload_path = ''
+        self.pipe_client_pid = 0        
 
     def setSMB2Support(self, value):
         self.smb2support = value
@@ -201,3 +206,8 @@ class NTLMRelayxConfig:
 
     def setWebDAVOptions(self, serve_image):
         self.serve_image = serve_image
+        
+    def setNamedPipeOptions(self, pipe_name, payload_path, pipe_client_pid):
+        self.pipe_name = pipe_name
+        self.payload_path = payload_path
+        self.pipe_client_pid = pipe_client_pid        

@@ -161,6 +161,7 @@ def start_servers(options, threads):
         c.setInterfaceIp(options.interface_ip)
         c.setExploitOptions(options.remove_mic, options.remove_target)
         c.setWebDAVOptions(options.serve_image)
+        c.setNamedPipeOptions(options.np_name, options.np_payload, options.np_pid)        
 
         if server is HTTPRelayServer:
             c.setListeningPort(options.http_port)
@@ -309,6 +310,12 @@ if __name__ == '__main__':
                         'dump all emails')
     imapoptions.add_argument('-im','--imap-max', action='store',type=int, required=False,default=0, help='Max number of emails to dump '
         '(0 = unlimited, default: no limit)')
+        
+    #Named Pipe options
+    npoptions = parser.add_argument_group("Named Pipe client options")
+    npoptions.add_argument('--np-name', metavar="NAME", action='store', required=False, help='The name of the pipe to connect to')
+    npoptions.add_argument('--np-payload', metavar="FILE", action='store', required=False, help='Path to a file used as the payload')
+    npoptions.add_argument('--np-pid', metavar="PID", action='store', required=False, default=0, help='A specific client connection PID to use (cycle to 50000 is default)')        
 
     try:
        options = parser.parse_args()
